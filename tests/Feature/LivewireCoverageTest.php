@@ -2,21 +2,22 @@
 
 declare(strict_types=1);
 
-use Illuminate\Auth\Access\AuthorizationException;
 use Liberu\Accounting\CustomReportBuilderLivewire\CustomReportBuilderLivewireServiceProvider;
 use Liberu\Accounting\CustomReportBuilderLivewire\Livewire\ReportOverview;
 use Liberu\Accounting\Erp\Models\User;
-use Livewire\Livewire;
 
 it('renders accounting-custom-report-builder-livewire livewire components', function (): void {
     $provider = $this->app->register(CustomReportBuilderLivewireServiceProvider::class, force: true);
-    if (method_exists($provider, 'boot')) { $provider->boot(); }
+    if (method_exists($provider, 'boot')) {
+        $provider->boot();
+    }
     expect($provider)->toBeInstanceOf(CustomReportBuilderLivewireServiceProvider::class);
-
 
     $this->actingAs(User::factory()->create());
 
-    $component = new ReportOverview;
-    if (method_exists($component, 'mount')) { $component->mount(); }
+    $component = new ReportOverview();
+    if (method_exists($component, 'mount')) {
+        $component->mount();
+    }
     expect($component->render())->not->toBeNull();
 });
